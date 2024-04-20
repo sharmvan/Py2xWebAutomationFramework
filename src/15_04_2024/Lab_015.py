@@ -60,10 +60,3 @@ def test_vwologin_negative_TC():
     assert error_msg_element.text == "Your email, password, IP address or location did not match"
 
     driver.quit()
-# There are 2 major problems in this case. 1.time.sleep(5) which is wait.Here, we are using python wait
-# mechanism.Python interpreter is getting basically weighted.We are telling python interpreter to wait for 5 seconds
-# which is not good. 2.Another problem is this code can be made more generic if possible. Generic basically means
-# below is the code which we need to execute every time. driver = webdriver.Chrome() driver.get(
-# "https://app.vwo.com") And also quit driver.quit() # We need to execute every time. Hence, such kind of code we can
-# make it generic where different test cases we have, we can appoint them in a simple manner.
-
