@@ -43,3 +43,11 @@ def test_vwologin():
     allure.attach(driver.get_screenshot_as_png(), name="login-screenshot", attachment_type=AttachmentType.PNG)
 
     driver.quit()
+
+
+
+
+
+
+
+
