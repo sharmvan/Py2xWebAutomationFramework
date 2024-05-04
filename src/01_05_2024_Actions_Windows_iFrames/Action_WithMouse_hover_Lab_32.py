@@ -7,7 +7,8 @@ from selenium.webdriver.common.actions.action_builder import ActionBuilder
 from selenium.webdriver.common.actions.mouse_button import MouseButton
 from selenium.webdriver.common.actions.wheel_input import ScrollOrigin
 import time
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 def test_04_move_to_element():
     driver = webdriver.Chrome()
@@ -69,6 +70,7 @@ def test_07_makemytrip():
     driver.maximize_window()
     time.sleep(5)
     from_city = driver.find_element(By.ID, "fromCity")
+    # Strategy is: find the element-> move to the element-> send keys
     #from_city.send_keys("New Delhi") --> This is not a good way and not recommended
     #Rather than using send keys, we can use action classes
     #Below is the good way as first we want to hover. For eg:
@@ -76,6 +78,21 @@ def test_07_makemytrip():
     #whenever there are certain input boxes which are out of focus, we will kove to a particulatr element,
     #and then "ActionChains" in this case.
     #when we can use this? when directly "send_keys" not working.
+
+    #call "actions",
+    # from the "ActionChains", we need to pass "driver",
+    # from the "ActionChains", I need to move this element,
+    # then perform "sendkeys" and in the end, need to "perform" action. when you have one or more actions, we need to use "perform"
     action = ActionChains(driver).move_to_element(from_city).click().send_keys("New Delhi").perform()
     time.sleep(20)
-    
+
+def test_07_makemytrip_toremovepopups():
+    driver = webdriver.Chrome()
+    driver.get("https://www.makemytrip.com/")
+    driver.maximize_window()
+    WebDriverWait(driver=driver,timeout=5).until(EC.visibility_of_element_located((By.XPATH,"//span[@class='commonModal__close']")))
+
+    driver.find_element(By.XPATH,"//span[@class='commonModal__close']").click()
+    from_city = driver.find_element(By.ID, "fromCity")
+    action = ActionChains(driver).move_to_element(from_city).click().send_keys("New Delhi").perform()
+    time.sleep(20)

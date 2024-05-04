@@ -21,18 +21,20 @@ def test_window():
     time.sleep(2)
 
     # before clicking "click here" button:
-    main_window_handle = driver.current_window_handle
+    main_window_handle = driver.current_window_handle # This is our parent window.
     print(main_window_handle)
     link = driver.find_element(By.LINK_TEXT, "Click Here")
     link.click()  # A child window will get opened
 
     window_handles = driver.window_handles  # It will give you Total window_handle. in this case: 2 (parent & child)
     print(window_handles)
+    time.sleep(2)
+
 
     # How to navigate to second window? by using for loop in "window_handles"
     for handle in window_handles:
     # we can switch to any window by using "switch_to.window" method. and which window ypu want to do "handle" in this case.
-        driver.switch_to.window(handle)
+        driver.switch_to.window(handle) # switch to child
         time.sleep(10)
         if "New Window" in driver.page_source:
             print("Found the text")
@@ -41,7 +43,8 @@ def test_window():
 
 # Note: Navigations happen when you are on the same page. but here there are 2 windows.
 
-    # if we want to move back to parent window then use "switch_to.window"?
+    # After 3 seconds, if we want to move back to parent window then use "switch_to.window"?
+    time.sleep(3)
     driver.switch_to.window(main_window_handle)
     time.sleep(10)
 
