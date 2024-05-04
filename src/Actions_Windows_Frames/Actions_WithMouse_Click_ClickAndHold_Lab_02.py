@@ -41,6 +41,6 @@ def test_02_actions():
     # Action Builder is used for the mouse buttons.
     action_builder = ActionBuilder(driver)  # we need to pass driver. It provides extra items.
     action_builder.pointer_action.pointer_down(MouseButton.BACK) # by using pointer_action, we can move your mouse to a particular location & you can click a particular button also.
-    # action_builder.pointer_action.pointer_down(MouseButton.BACK)
+    action_builder.pointer_action.pointer_down(MouseButton.BACK)
     action_builder.perform()
-    time.sleep(2)
+    time.sleep(15)

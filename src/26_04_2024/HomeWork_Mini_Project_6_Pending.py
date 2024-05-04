@@ -12,14 +12,28 @@ def test_Orange_HRM():
     driver = webdriver.Chrome()
     driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login")
     driver.maximize_window()
-    time.sleep(1)
+    time.sleep(2)
+
 
     username=driver.find_element(By.XPATH, "//input[@name='username']").send_keys('Admin')
-    time.sleep(1)
-    password=driver.find_element(By.XPATH, "//input[@name='password']").send_keys("admin123")
-    time.sleep(1)
-    login_btn=driver.find_element(By.XPATH, "//button[@type='submit']").click()
-    time.sleep(5)
+    time.sleep(2)
 
-    admin_element_icon=driver.find_element(By.XPATH, "//a[@class='oxd-main-menu-item active']").click()
-    time.sleep(1)
+    password=driver.find_element(By.XPATH, "//input[@name='password']").send_keys("admin123")
+    time.sleep(2)
+    login_btn=driver.find_element(By.XPATH, "//button[@type='submit']").click()
+    time.sleep(2)
+
+    admin_element_icon=driver.find_element(By.XPATH, "//a[@href='/web/index.php/admin/viewAdminModule']").click()
+    time.sleep(2)
+    admin_add_btn=driver.find_element(By.XPATH,"//button[@class='oxd-button oxd-button--medium oxd-button--secondary']").click()
+    time.sleep(2)
+    user_role=driver.find_element(By.XPATH,"//i[@class='oxd-icon bi-caret-down-fill oxd-select-text--arrow']")
+    user_role_admin=user_role[0]
+    user_role_admin.click()
+    
+
+
+
+
+
+
