@@ -13,23 +13,25 @@ def test_ebay():
     driver = webdriver.Chrome()
     driver.get("https://www.ebay.com/")
     driver.maximize_window()
-    #time.sleep(2)
+    # time.sleep(2)
 
     search_box = driver.find_element(By.XPATH, "//input[@id='gh-ac']").send_keys('16gb')
-    #time.sleep(2)
+    # time.sleep(2)
     search_btn = driver.find_element(By.XPATH, "//input[@id='gh-btn']").click()
-    #time.sleep(2)
+    # time.sleep(2)
 
     list_of_elements = driver.find_elements(By.XPATH, "//span[@role='heading']")
 
     for product in list_of_elements:
-        product_name = product.text
-        print(product_name)
+        print(product.text)
 
     price_of_product = driver.find_elements(By.XPATH, "//span[@class='s-item__price']")
+    price = []
     for price in price_of_product:
-        price_list = price.text
-        print(price_list[0])
-        print(f"The price of {product_name} is, {price_list[0]}")
-
-
+        print(price.text)
+        y = price.text.replace("$", "").strip()
+        price.append(y)
+    price.sort()
+    print(f"The lowest price of the product is:", price[0])
+    time.sleep(5)
+    driver.quit()
