@@ -15,9 +15,10 @@ def test_practice():
     driver.find_element(By.XPATH, "//button[contains(text(),'Submit')]").click()
     time.sleep(2)
 
-    s1 = driver.find_element(locate_with(By.XPATH, '//small[contains(text(),"Username")]').below({By.ID: 'username'}))
-    print(s1.text)
+    s1 = driver.find_element(locate_with(By.XPATH, '//small[contains(text(),"Username")]').below({By.ID: 'username'})).text
+    print(s1)
     time.sleep(5)
 
     assert s1 == "Username must be at least 3 characters"
     time.sleep(7)
+
