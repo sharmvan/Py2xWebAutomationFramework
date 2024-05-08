@@ -23,14 +23,19 @@ def test_Orange_HRM():
     login_btn=driver.find_element(By.XPATH, "//button[@type='submit']").click()
     time.sleep(2)
 
-    admin_element_icon=driver.find_element(By.XPATH, "//a[@href='/web/index.php/admin/viewAdminModule']").click()
+    admin_element_icon = driver.find_element(By.XPATH, "//a[@href='/web/index.php/admin/viewAdminModule']").click()
     time.sleep(2)
-    admin_add_btn=driver.find_element(By.XPATH,"//button[@class='oxd-button oxd-button--medium oxd-button--secondary']").click()
+    admin_add_btn = driver.find_element(By.XPATH,
+                                        "//button[@class='oxd-button oxd-button--medium oxd-button--secondary']").click()
     time.sleep(2)
-    user_role=driver.find_element(By.XPATH,"//i[@class='oxd-icon bi-caret-down-fill oxd-select-text--arrow']")
-    user_role_admin=user_role[0]
-    user_role_admin.click()
-    
+
+    user_role=driver.find_elements(By.XPATH,"//i[@class='oxd-icon bi-caret-down-fill oxd-select-text--arrow']")
+    user_role[0].click()
+    time.sleep(5)
+
+
+
+
 
 
 

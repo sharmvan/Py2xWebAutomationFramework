@@ -30,7 +30,7 @@ def read_credentials_from_excel(file_path):
     return credentials
 
 
-file_path_fromos = os.getcwd() + "/testdata_ddt_123.xlsx"
+file_path_fromos = os.getcwd() + "/testdataCreatedFrom_GoogleDrive.xlsx"
 print(file_path_fromos)
 
 

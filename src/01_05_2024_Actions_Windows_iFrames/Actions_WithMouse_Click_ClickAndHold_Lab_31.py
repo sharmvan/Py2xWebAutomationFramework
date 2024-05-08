@@ -63,7 +63,6 @@ def test_02_actions_builder():
     # Action Builder -> by using mouse, we can click back also by using Action Builder.
     # Action Builder is used for the mouse buttons.
     action_builder = ActionBuilder(driver)  # we need to pass driver. It provides extra items.
-    action_builder.pointer_action.pointer_down(MouseButton.BACK) # by using pointer_action, we can move your mouse to a particular location & you can click a particular button also.
-    # action_builder.pointer_action.pointer_down(MouseButton.BACK)
+    action_builder.pointer_action.pointer_up(MouseButton.BACK) # by using pointer_action, we can move mouse to a particular location & we can click a particular button also.
     action_builder.perform()
-    time.sleep(15)
+    time.sleep(5)
