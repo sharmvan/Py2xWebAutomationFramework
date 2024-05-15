@@ -1,7 +1,4 @@
-import os
-import allure
-import openpyxl
-import pytest
+import os, time, allure, openpyxl, pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from allure_commons.types import AttachmentType
@@ -21,6 +18,7 @@ def read_credentials_from_excel(file_path):
     credentials = []
     workbook = openpyxl.load_workbook(file_path)
     sheet = workbook.active
+
     for row in sheet.iter_rows(min_row=2, values_only=True):
         username, password = row
         credentials.append({
@@ -40,11 +38,11 @@ print(file_path_fromos)
 def test_vwologin(user_cred):
     username = user_cred["username"]
     password = user_cred["password"]
-    # vwologin(username=username,password=password)
-    print(username, password)
+    vwo_login(username=username,password=password)
+    # print(username, password)
 
 
-def vwologin(username, password):
+def vwo_login(username, password):
     driver = webdriver.Chrome()
     driver.get("https://app.vwo.com")
     driver.maximize_window()
@@ -59,8 +57,9 @@ def vwologin(username, password):
     # Whatever the current url that we have after entering the correct username and password
     # If username and password is correct, I can see dashboard page.
     # If username and password is not correct, then I will an error message.
+    time.sleep(5)
     result = driver.current_url
-    if result != "https://app.vwo.com/#dashboard":
+    if result != "https://app.vwo.com/#/dashboard":
         ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
 
         WebDriverWait(driver=driver, timeout=5, poll_frequency=1, ignored_exceptions=ignore_list).until(
@@ -70,13 +69,12 @@ def vwologin(username, password):
         print(error_msg_element.text)
         assert error_msg_element.text == "Your email, password, IP address or location did not match"
     else:
-        ignore_list = [ElementNotVisibleException, ElementNotSelectableException]
-        WebDriverWait(driver=driver, timeout=10, poll_frequency=1, ignored_exceptions=ignore_list).until(
+        WebDriverWait(driver=driver, timeout=15).until(
             EC.text_to_be_present_in_element((By.XPATH, '//h1[@class="page-heading"]'), text_="Dashboard"))
 
         heading_element = driver.find_element(By.XPATH, '//span[@data-qa="lufexuloga"]')
         assert heading_element.text == "Py2xATB"
 
         allure.attach(driver.get_screenshot_as_png(), name="login-screenshot", attachment_type=AttachmentType)
-        driver.quit()
+    driver.quit()
 

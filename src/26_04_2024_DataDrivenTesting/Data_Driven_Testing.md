@@ -17,5 +17,5 @@
 # Data Driven Testing
 * Test cases derived from the test data
 * Reading CSV, Excel File Testdata and inject the data into TC
-* Running TC multiple times from the Test Data
+* You're running your TCs multiple times from the Test Data
 
