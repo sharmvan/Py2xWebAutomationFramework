@@ -25,15 +25,16 @@ class LoginPage:
     # Second thing is page locator. How can we keep our page locators?
     # We have just the found locators. and these are just normal tuples. we need to create them into Actions.
     # Proper page action are needed.
-    username = (By.ID, "login-username")  # username of current class.
-    password = (By.ID, "login-password")
-    sign_in_btn = (By.ID, "js-login-btn")
-    # forget_password = (By.XPATH, "//button[@class='btn btn--link btn--primary Td(u) Fz(12px)']")
-    error_msg = (By.XPATH, "//div[@id='js-notification-box-msg']")
+    username = (By.XPATH, "//input[@id='login-username']")  # username of current class.
+    password = (By.XPATH, "//input[@name='password']")
+    submit_button = (By.XPATH, "//button[@id='js-login-btn']")
+    # forgot_password_button = (By.XPATH, "//button[@onclick='login.gotoForgotPasswordView()']")
+    error_message = (By.XPATH, "//div[@id='js-notification-box-msg']")
 
-    # free_trail = (By.XPATH, "//a[@class='text-link']")
-    # sso_login = (By.XPATH, "//button[@class='btn btn--link btn--primary Td(u)']")
-    # remember_checkbox = (By.XPATH, "//span[@class='checkbox-radio-button ng-scope']")
+    free_trail = (By.XPATH, "//a[@class='text-link']")
+
+    # sso_login = (By.XPATH, "//button[@onclick='login.goToSSOView()']")
+    # remember_checkbox = (By.XPATH, "//label[@for='checkbox-remember']")
 
     # Proper "Page Action" is needed so that we can interact with "page locators" in the future.
     # Here we will be creating a couple of utilities and anyone can use this utility if they want to get in the future.
@@ -44,30 +45,26 @@ class LoginPage:
     def get_password(self):
         return self.driver.find_element(*LoginPage.password)
 
-    def get_error_msg(self):
-        return self.driver.find_element(*LoginPage.error_msg)
+    def get_submit_button(self):
+        return self.driver.find_element(*LoginPage.submit_button)
 
-    def get_sign_in_btn(self):
-        return self.driver.find_element(*LoginPage.sign_in_btn)
+    def get_error_message(self):
+        return self.driver.find_element(*LoginPage.error_message)
 
-
-# This function can be used for +ve and -ve both.
-    def vwo_login(self, usr, pwd):
-        self.get_username().send_keys(usr)
-        self.get_password().send_keys(pwd)
-        self.get_password().click()
-
-    def get_error_msg_text(self):
-        return self.get_error_msg().text
+    def get_free_trail(self):
+        return self.driver.find_element(*LoginPage.free_trail)
 
     # Page Action --> Main Action.
     # This page can do one main action i.e. It can do log in.
     # We need to pass usr and pwd. whatever the usr and pwd, you will pass me.
     # I will use "get_username()" and I will do "send keys".
-    def login_to_vwo(self, usr, pwd):
+    def login_to_vwo(self, usr, pwd):  # This is for +ve and -ve both
         self.get_username().send_keys(usr)
         self.get_password().send_keys(pwd)
-        self.get_sign_in_btn().click()
+        self.get_submit_button().click()
 
     def get_error_message_text(self):
-        return self.get_error_msg().text
+        return self.get_error_message().text
+
+    def click_free_trail(self):
+        self.get_free_trail().click()
