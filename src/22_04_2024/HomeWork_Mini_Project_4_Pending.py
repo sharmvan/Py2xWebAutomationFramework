@@ -25,16 +25,15 @@ def test_ebay():
     for product in list_of_products:
         print(product.text)
 
-    price_of_product = driver.find_elements(By.XPATH, "//span[@class='s-item__price']")
+    list_of_products_price = driver.find_elements(By.XPATH, "//span[@class='s-item__price']")
     prices = []
-    for price in price_of_product:
+    for price in list_of_products_price:
         print(price.text)
-        y = price.text.replace("$", "").strip()
-        prices.append(y)
+        # y = price.replace("$", "").strip()
+        prices.append(price)
 
     prices.sort()
-    min_price = prices[1]
-    print(f"The lowest price of the product is {prices[1]}")
+    lowest_price = prices[0]
+    print(lowest_price)
     time.sleep(5)
     driver.quit()
-

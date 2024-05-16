@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import (ElementNotVisibleException, ElementNotSelectableException)
 
-
 # Data Driven Test case for the Login Page.
 # We will test invalid logins for the vwo login page.
 
